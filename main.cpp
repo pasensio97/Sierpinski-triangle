@@ -3,7 +3,7 @@
 	GitHub: https://github.com/pasensio97
 */
 #include <iostream>
-#include <list>
+#include <vector>
 #include <cmath>
 
 class Pascal_pyramid
@@ -25,27 +25,27 @@ public:
 	void make_pyramid() {
 		for (int i = 1; i <= number_rows_; i++) {
 			if (i == 1){
-				std::list<int> l{1};
+				std::vector<int> l{1};
 				block_.push_back(l);
 			}else if (i == 2){
-				std::list<int> l{1,1};
+				std::vector<int> l{1,1};
 				block_.push_back(l);
 			}else{
-				std::list<std::list<int>>::iterator itr;
+				std::vector<std::vector<int>>::iterator itr;
 
-				for(){
+				/*for(){
 					;
-				}
+				}*/
 			}
 		}
 	}
 
 	void display(){
-		std::list<std::list<int>>::iterator itr;
+		std::vector<std::vector<int>>::iterator itr;
 		for (itr=block_.begin(); itr != block_.end(); itr++)
 		{
-		   std::list<int>tl =* itr;
-		   std::list<int>::iterator it;
+		   std::vector<int>tl =* itr;
+		   std::vector<int>::iterator it;
 		   for (it = tl.begin(); it != tl.end(); it++)
 		   {
 		       std::cout << *it << " ";
@@ -56,7 +56,7 @@ public:
 
 private:
 	int number_rows_;
-	std::list<std::list<int>> block_; //contains all rows with their numbers
+	std::vector<std::vector<int>> block_; //contains all rows with their numbers
 };
 
 int main(int argc, char const *argv[]) {
