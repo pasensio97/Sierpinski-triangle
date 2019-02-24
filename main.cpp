@@ -3,7 +3,7 @@
 	GitHub: https://github.com/pasensio97
 */
 #include <iostream>
-#include <vector>
+#include <list>
 #include <cmath>
 
 class Pascal_pyramid
@@ -23,33 +23,50 @@ public:
 	unsigned int get_number_rows() const {return number_rows_;}
 
 	void make_pyramid() {
-		std::vector<std::vector<unsigned int>>::iterator itr_row;
-		itr_row = block_.begin(); // first row
-		std::cerr << itr_row.front << '\n';
-
+		std::list<std::list<unsigned int>>::iterator itr_row;
 		for (unsigned int i = 1; i <= number_rows_; i++) {
 			if (i == 1){
-				std::vector<unsigned int> l{1};
-				block_.push_back(l);
+				std::list<unsigned int> new_row{1};
+				block_.push_back(new_row);
 			}else if (i == 2){
-				std::vector<unsigned int> l{1,1};
-				block_.push_back(l);
+				std::list<unsigned int> new_row{1,1};
+				block_.push_back(new_row);
 			}else{
+				itr_row = block_.end();
+				--itr_row; // itr at last info row
 
+				std::list<unsigned int> new_row;
+				std::list<unsigned int> last_row = *itr_row;
+				std::list<unsigned int>::iterator it1;
+				std::list<unsigned int>::iterator it2;
 
-				/*for(){
-					;
-				}*/
+				it1 = last_row.begin();
+				it2 = last_row.begin();
+				++it2; // it2 at second row's position
+
+				while (it2 != last_row.end()) {
+					unsigned int new_value;
+					new_value = *it1 + *it2;
+					new_row.push_back(new_value);
+					it1++;
+					it2++;
+				}
+
+				new_row.push_front(1);
+				new_row.push_back(1);
+
+				block_.push_back(new_row);
+
 			}
 		}
 	}
 
 	void display(){
-		std::vector<std::vector<unsigned int>>::iterator itr;
+		std::list<std::list<unsigned int>>::iterator itr;
 		for (itr = block_.begin(); itr != block_.end(); itr++)
 		{
-		   std::vector<unsigned int> tl = *itr;
-		   std::vector<unsigned int>::iterator it;
+		   std::list<unsigned int> tl = *itr;
+		   std::list<unsigned int>::iterator it;
 		   for (it = tl.begin(); it != tl.end(); it++)
 		       std::cout << *it << " ";
 		   std::cout << '\n';
@@ -58,7 +75,7 @@ public:
 
 private:
 	unsigned int number_rows_;
-	std::vector<std::vector<unsigned int>> block_; //contains all rows with their numbers
+	std::list<std::list<unsigned int>> block_; //contains all rows with their numbers
 };
 
 int main(unsigned int argc, char const *argv[]) {
