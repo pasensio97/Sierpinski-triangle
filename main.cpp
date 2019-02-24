@@ -10,28 +10,32 @@ class Pascal_pyramid
 {
 public:
 	Pascal_pyramid(){
-		std::cout << "Set, between 1 to max int, rows' number of Pascal Pyramid" << '\n';
+		std::cout << "Set, between 1 to max unsigned int, rows' number of Pascal Pyramid" << '\n';
 		std::cin >> number_rows_;
 		if (number_rows_ < 1) {
-			std::cerr << "Incorrect number. Rows' number setted to 1." << '\n'; // try catch sould be better;
+			std::cerr << "Incorrect number. Rows' number setted to 1." << '\n'; // try catch should be better;
 			number_rows_ = 1;
 		}
 		make_pyramid();
 	}
 
-	void set_number_rows(int rows) {number_rows_ = rows;}
-	int get_number_rows() const {return number_rows_;}
+	void set_number_rows(unsigned int rows) {number_rows_ = rows;}
+	unsigned int get_number_rows() const {return number_rows_;}
 
 	void make_pyramid() {
-		for (int i = 1; i <= number_rows_; i++) {
+		std::vector<std::vector<unsigned int>>::iterator itr_row;
+		itr_row = block_.begin(); // first row
+		std::cerr << itr_row.front << '\n';
+
+		for (unsigned int i = 1; i <= number_rows_; i++) {
 			if (i == 1){
-				std::vector<int> l{1};
+				std::vector<unsigned int> l{1};
 				block_.push_back(l);
 			}else if (i == 2){
-				std::vector<int> l{1,1};
+				std::vector<unsigned int> l{1,1};
 				block_.push_back(l);
 			}else{
-				std::vector<std::vector<int>>::iterator itr;
+
 
 				/*for(){
 					;
@@ -41,25 +45,23 @@ public:
 	}
 
 	void display(){
-		std::vector<std::vector<int>>::iterator itr;
-		for (itr=block_.begin(); itr != block_.end(); itr++)
+		std::vector<std::vector<unsigned int>>::iterator itr;
+		for (itr = block_.begin(); itr != block_.end(); itr++)
 		{
-		   std::vector<int>tl =* itr;
-		   std::vector<int>::iterator it;
+		   std::vector<unsigned int> tl = *itr;
+		   std::vector<unsigned int>::iterator it;
 		   for (it = tl.begin(); it != tl.end(); it++)
-		   {
 		       std::cout << *it << " ";
-		   }
 		   std::cout << '\n';
 	   	}
 	}
 
 private:
-	int number_rows_;
-	std::vector<std::vector<int>> block_; //contains all rows with their numbers
+	unsigned int number_rows_;
+	std::vector<std::vector<unsigned int>> block_; //contains all rows with their numbers
 };
 
-int main(int argc, char const *argv[]) {
+int main(unsigned int argc, char const *argv[]) {
 
 	Pascal_pyramid pyramid;
 	pyramid.display();
